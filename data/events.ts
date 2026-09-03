@@ -1,4 +1,4 @@
-export type EventCategory = "Workshop" | "Company Visit" | "Networking" | "Career Talk";
+export type EventCategory = "Workshop" | "Company Visit" | "Networking" | "Career Talk" | "Career Fair";
 export type EventStatus = "Open for Registration" | "Coming Soon" | "Registration Closed";
 
 export interface EventItem {
@@ -15,95 +15,78 @@ export interface EventItem {
   registrationPeriod: { from: string; to: string };
 }
 
+// CUMT's own activity timeline, sourced from the CUMT Proposal deck (Sep 2026).
+// Dates as stated in the proposal; several are not yet finalised.
 export const events: EventItem[] = [
   {
-    slug: "unilever-fmcg-workshop",
-    title: "FMCG Brand Management Workshop",
-    partnerCompany: "Unilever Thailand",
-    date: "05 Sep 2026",
-    time: "13:00 - 16:00",
-    location: "Chulalongkorn Business School, Room 301",
-    category: "Workshop",
-    status: "Open for Registration",
-    shortDescription:
-      "Hands-on session on brand strategy and go-to-market planning led by Unilever brand managers.",
-    fullDescription:
-      "Join Unilever Thailand's brand management team for an interactive workshop covering brand positioning, campaign planning, and go-to-market execution. Participants will work in small groups on a live mini case and present recommendations to a panel of Unilever managers.",
-    registrationPeriod: { from: "10 Aug 2026", to: "01 Sep 2026" },
-  },
-  {
-    slug: "pttgc-site-visit",
-    title: "PTTGC Rayong Site Visit",
-    partnerCompany: "PTT Global Chemical",
-    date: "20 Sep 2026",
-    time: "08:00 - 17:00",
-    location: "PTTGC Rayong Complex",
-    category: "Company Visit",
-    status: "Open for Registration",
-    shortDescription:
-      "Full-day visit to PTTGC's petrochemical complex with plant tour and MT program briefing.",
-    fullDescription:
-      "Experience PTT Global Chemical's operations firsthand with a guided plant tour, sustainability briefing, and a Q&A session with current Management Trainees. Transportation from Chulalongkorn University is provided.",
-    registrationPeriod: { from: "15 Aug 2026", to: "10 Sep 2026" },
-  },
-  {
-    slug: "scb-networking-night",
-    title: "SCB Networking Night",
-    partnerCompany: "Siam Commercial Bank",
-    date: "28 Sep 2026",
-    time: "18:00 - 20:30",
-    location: "SCB Park Plaza, Ratchayothin",
+    slug: "mt-alumni-roundtable",
+    title: "MT Alumni Roundtable",
+    partnerCompany: "CUMT",
+    date: "10 Oct 2026",
+    time: "TBA",
+    location: "Chulalongkorn University",
     category: "Networking",
     status: "Coming Soon",
-    shortDescription:
-      "Casual networking evening with SCB executives, alumni, and current MT program participants.",
+    shortDescription: "Roundtable conversation with Management Trainee alumni kicking off the first semester.",
     fullDescription:
-      "An evening of structured networking rounds and open mingling with SCB leadership, HR, and alumni of the SCB Future Banker program. Business casual attire recommended.",
-    registrationPeriod: { from: "01 Sep 2026", to: "20 Sep 2026" },
+      "An informal roundtable connecting CUMT members with alumni who have gone through Management Trainee and graduate programs, sharing firsthand experience on recruitment and early careers.",
+    registrationPeriod: { from: "TBA", to: "TBA" },
   },
   {
-    slug: "unilever-career-talk",
-    title: "Career Talk: Life as an MT",
-    partnerCompany: "Unilever Thailand",
-    date: "12 Oct 2026",
-    time: "17:00 - 19:00",
-    location: "Chulalongkorn Business School Auditorium",
-    category: "Career Talk",
+    slug: "panel-talk-mt-career-fair",
+    title: "Panel Talk & MT Career Fair",
+    partnerCompany: "CUMT",
+    date: "2-6 Nov 2026 (not yet finalised)",
+    time: "TBA",
+    location: "Sala Phra Kiao, Chulalongkorn University",
+    category: "Career Fair",
     status: "Coming Soon",
     shortDescription:
-      "Panel discussion with current and former Unilever Future Leaders Programme trainees.",
+      "CUMT's flagship career event connecting Chulalongkorn students with leading employers and MT opportunities.",
     fullDescription:
-      "Hear directly from Unilever Future Leaders Programme alumni about day-to-day responsibilities, rotation structure, and tips for a strong application. Open floor Q&A follows the panel.",
-    registrationPeriod: { from: "15 Sep 2026", to: "05 Oct 2026" },
+      "The MT Career Fair & Panel Talk, organized by CUMT, is a flagship career event designed to connect Chulalongkorn University students with leading employers and Management Trainee (MT) opportunities across industries. The day includes an executive panel on MT recruitment trends, a dedicated career fair floor, direct HR Q&A sessions, and exclusive mentoring sessions. Targeting around 20 leading corporate partners for an audience of ambitious, highly vetted Chulalongkorn students actively preparing for MT and strategic roles.",
+    registrationPeriod: { from: "TBA", to: "TBA" },
   },
   {
-    slug: "pepsico-case-workshop",
-    title: "PepsiCo Case Cracking Workshop",
-    partnerCompany: "PepsiCo Thailand",
-    date: "18 Oct 2026",
-    time: "13:00 - 17:00",
-    location: "Chulalongkorn Business School, Room 205",
+    slug: "networking-company-visit",
+    title: "Networking & Company Visit",
+    partnerCompany: "CUMT",
+    date: "Jan-Feb 2027",
+    time: "TBA",
+    location: "Partner company offices",
+    category: "Company Visit",
+    status: "Coming Soon",
+    shortDescription: "Networking sessions with company HR and on-site company visits for selected CUMT members.",
+    fullDescription:
+      "Two collaboration formats with partner companies: a networking session connecting company HR directly with ambitious Chulalongkorn students to share career experiences and introduce MT opportunities, and a company visit where selected CUMT members experience the workplace and culture firsthand, meeting employees and Management Trainees.",
+    registrationPeriod: { from: "TBA", to: "TBA" },
+  },
+  {
+    slug: "mt-career-accelerator-finalize",
+    title: "MT Career Accelerator Program — Finalize",
+    partnerCompany: "CUMT",
+    date: "Early Jan 2027",
+    time: "TBA",
+    location: "Chulalongkorn University",
     category: "Workshop",
     status: "Coming Soon",
-    shortDescription:
-      "Learn structured case-solving frameworks used in PepsiCo's assessment center.",
+    shortDescription: "Corporate partners and project scope for the MT Career Accelerator Program are finalized.",
     fullDescription:
-      "PepsiCo talent acquisition leads will walk through a sample assessment-center case, share evaluation criteria, and coach participants through a live practice case in small groups.",
-    registrationPeriod: { from: "20 Sep 2026", to: "12 Oct 2026" },
+      "The MT Career Accelerator Program is an 8-10 week development program preparing high-potential students for Management Trainee careers through structured training (Learn), functional exposure (Seek), a real corporate project (Apply), and MT assessment-center practice (Test). This milestone finalizes the corporate partners and project scope for the upcoming cohort.",
+    registrationPeriod: { from: "TBA", to: "TBA" },
   },
   {
-    slug: "central-retail-visit",
-    title: "Central Retail Headquarters Visit",
-    partnerCompany: "Central Retail Corporation",
-    date: "02 Nov 2026",
-    time: "09:00 - 15:00",
-    location: "Central Retail Head Office, Bangkok",
-    category: "Company Visit",
-    status: "Registration Closed",
-    shortDescription:
-      "Behind-the-scenes look at Central Retail's merchandising and omnichannel operations.",
+    slug: "mt-career-accelerator-onboard",
+    title: "MT Career Accelerator Program — Onboard",
+    partnerCompany: "CUMT",
+    date: "Late Jan 2027",
+    time: "TBA",
+    location: "Chulalongkorn University",
+    category: "Workshop",
+    status: "Coming Soon",
+    shortDescription: "Selected students onboard onto the MT Career Accelerator Program cohort.",
     fullDescription:
-      "Tour Central Retail's headquarters to see how merchandising, supply chain, and omnichannel teams collaborate. Includes a briefing on the Central Group Management Trainee pathway.",
-    registrationPeriod: { from: "01 Sep 2026", to: "25 Sep 2026" },
+      "Students selected for the MT Career Accelerator Program cohort onboard and begin the Learn phase: building core business acumen and strengthening hard and soft skills through professor-led development sessions, ahead of functional exposure and a real corporate project later in the program.",
+    registrationPeriod: { from: "TBA", to: "TBA" },
   },
 ];

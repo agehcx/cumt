@@ -5,7 +5,14 @@ import { EventCard, PastEventCard } from "@/components/cards";
 import { events, type EventCategory } from "@/data/events";
 import { pastEvents } from "@/data/pastEvents";
 
-const FILTERS: Array<EventCategory | "All"> = ["All", "Workshop", "Company Visit", "Networking", "Career Talk"];
+const FILTERS: Array<EventCategory | "All"> = [
+  "All",
+  "Career Fair",
+  "Workshop",
+  "Company Visit",
+  "Networking",
+  "Career Talk",
+];
 
 export default function EventsPage() {
   const [activeFilter, setActiveFilter] = useState<(typeof FILTERS)[number]>("All");
@@ -40,16 +47,18 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section className="bg-cream px-6 py-16">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
-          <h2 className="text-center font-serif text-3xl font-semibold text-navy">Past Events</h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {pastEvents.map((event) => (
-              <PastEventCard key={event.slug} event={event} />
-            ))}
+      {pastEvents.length > 0 && (
+        <section className="bg-cream px-6 py-16">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+            <h2 className="text-center font-serif text-3xl font-semibold text-navy">Past Events</h2>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {pastEvents.map((event) => (
+                <PastEventCard key={event.slug} event={event} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

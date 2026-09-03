@@ -4,7 +4,7 @@ import type { EventItem } from "@/data/events";
 import type { PastEventItem } from "@/data/pastEvents";
 import type { OpportunityItem } from "@/data/opportunities";
 import type { TeamMember } from "@/data/team";
-import { Placeholder, StatusBadge, Tag, ButtonLink } from "@/components/ui";
+import { StatusBadge, Tag, ButtonLink } from "@/components/ui";
 
 export function EventCard({ event }: { event: EventItem }) {
   return (
@@ -85,14 +85,19 @@ export function OpportunityCard({ opportunity }: { opportunity: OpportunityItem 
 
 export function TeamCard({ member }: { member: TeamMember }) {
   return (
-    <div className="flex w-40 flex-col items-center gap-2 text-center">
-      <Placeholder label="Photo" className="h-32 w-32 rounded-full" />
-      <div>
-        <p className="font-serif text-sm font-semibold text-navy">{member.name}</p>
-        <p className="text-xs font-medium text-rose">{member.position}</p>
-        <p className="text-xs text-navy/60">
-          {member.faculty}, {member.year}
+    <div className="flex w-52 flex-col overflow-hidden rounded-xl border border-gray-light bg-white shadow-sm">
+      {/* eslint-disable-next-line @next/next/no-img-element -- static asset in public/, next/image adds no value here */}
+      <img
+        src={member.photo}
+        alt={member.name}
+        className="h-60 w-full object-cover object-top"
+      />
+      <div className="flex flex-col gap-1 p-4 text-center">
+        <p className="font-serif text-sm font-semibold text-navy">
+          {member.name} <span className="text-navy/60">({member.nickname})</span>
         </p>
+        <p className="text-xs font-medium text-rose">{member.role}</p>
+        <p className="text-xs leading-snug text-navy/60">{member.highlight}</p>
       </div>
     </div>
   );
