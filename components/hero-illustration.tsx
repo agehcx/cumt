@@ -24,14 +24,12 @@ export default function HeroIllustration({
         className="absolute inset-x-0 bottom-0 h-[42%] w-full object-cover object-bottom sm:h-[48%] lg:h-[54%]"
       />
 
-      <div className="absolute right-[6%] top-[16%] hidden w-[38%] max-w-[420px] rounded-2xl bg-white p-3 shadow-[0_20px_60px_rgba(13,25,56,0.45)] sm:block lg:top-[14%]">
-        {/* eslint-disable-next-line @next/next/no-img-element -- static asset in public/, next/image adds no value here */}
-        <img
-          src="/images/home/hero-climb.png"
-          alt="Illustration of people helping each other climb higher"
-          className="w-full rounded-lg"
-        />
-      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element -- static asset in public/, next/image adds no value here */}
+      <img
+        src="/images/home/hero-climb.png"
+        alt="Illustration of people helping each other climb higher"
+        className="absolute right-[6%] top-[16%] hidden w-[38%] max-w-[420px] drop-shadow-[0_20px_40px_rgba(13,25,56,0.5)] sm:block lg:top-[14%]"
+      />
     </div>
   );
 }
