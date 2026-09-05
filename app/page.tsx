@@ -14,16 +14,19 @@ const PILLARS = [
     title: "LEARN",
     body: "Develop business and leadership capabilities through workshops and practical experiences.",
     align: "left" as const,
+    photo: "/images/home/pillar-learn.jpg",
   },
   {
     title: "CONNECT",
     body: "Meet leading companies, Management Trainees, executives, and like-minded students.",
     align: "right" as const,
+    photo: "/images/home/pillar-connect.jpg",
   },
   {
     title: "LAUNCH",
     body: "Discover opportunities that help students begin their professional careers.",
     align: "left" as const,
+    photo: "/images/home/pillar-launch.jpg",
   },
 ];
 
@@ -81,10 +84,12 @@ function Pillar({
   title,
   body,
   align,
+  photo,
 }: {
   title: string;
   body: string;
   align: "left" | "right";
+  photo: string;
 }) {
   const isLeft = align === "left";
 
@@ -118,16 +123,12 @@ function Pillar({
     </div>
   );
 
-  const photo = (
-    <PhotoSlot
-      label={
-        <span>
-          Illustrative
-          <br />
-          Photo
-        </span>
-      }
-      className="h-[226px] w-full"
+  const photoEl = (
+    // eslint-disable-next-line @next/next/no-img-element -- static asset in public/, next/image adds no value here
+    <img
+      src={photo}
+      alt=""
+      className="h-[226px] w-full rounded-[6px] object-cover"
     />
   );
 
@@ -136,11 +137,11 @@ function Pillar({
       {isLeft ? (
         <>
           {copy}
-          {photo}
+          {photoEl}
         </>
       ) : (
         <>
-          {photo}
+          {photoEl}
           {copy}
         </>
       )}
@@ -216,10 +217,13 @@ export default function HomePage() {
           Upcoming Programs
         </h2>
 
-        <div className="relative mt-[50px] flex h-[420px] w-full items-center justify-center bg-gray lg:h-[633px]">
-          <span className="px-6 text-center text-[17px] text-navy">
-            Full-width slide show banners of upcoming programs
-          </span>
+        <div className="relative mt-[50px] h-[420px] w-full overflow-hidden lg:h-[633px]">
+          {/* eslint-disable-next-line @next/next/no-img-element -- static asset in public/, next/image adds no value here */}
+          <img
+            src="/images/home/upcoming-programs.jpg"
+            alt="CUMT panel talk and career fair"
+            className="h-full w-full object-cover"
+          />
           <div className="absolute bottom-[22px] left-1/2 flex -translate-x-1/2 gap-[15px]">
             {Array.from({ length: SLIDE_COUNT }).map((_, index) => (
               <span
