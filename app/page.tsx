@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import HeroIllustration from "@/components/hero-illustration";
+import { partners } from "@/data/partners";
 
 const STATS = [
   { value: "500+", label: "Students Reached" },
@@ -52,30 +53,50 @@ function PhotoSlot({
   );
 }
 
-/** Grey bento tile whose serif caption sits over the image area. */
+/** Bento tile with photo background, dark gradient overlay and clear typography. */
 function BentoTile({
   href,
   title,
+  subtitle,
+  photo,
   captionAtTop = false,
   className = "",
 }: {
   href: string;
   title: string;
+  subtitle?: string;
+  photo?: string;
   captionAtTop?: boolean;
   className?: string;
 }) {
   return (
     <Link
       href={href}
-      className={`relative block bg-gray transition-opacity hover:opacity-90 ${className}`}
+      className={`group relative block overflow-hidden rounded-2xl border border-gray-light/60 bg-navy shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:shadow-lg ${className}`}
     >
-      <span
-        className={`absolute left-[18px] max-w-[calc(100%-36px)] font-serif text-[28px] leading-[38px] text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.35)] ${
-          captionAtTop ? "top-[10px]" : "bottom-[10px]"
+      {photo && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={photo}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-60"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent" />
+      <div
+        className={`relative z-10 p-5 ${
+          captionAtTop ? "top-0" : "mt-auto flex flex-col justify-end h-full"
         }`}
       >
-        {title}
-      </span>
+        {subtitle && (
+          <span className="text-[11px] font-bold uppercase tracking-widest text-pink">
+            {subtitle}
+          </span>
+        )}
+        <span className="font-serif text-[24px] md:text-[28px] font-bold leading-[32px] text-white drop-shadow-md group-hover:text-pink transition-colors">
+          {title}
+        </span>
+      </div>
     </Link>
   );
 }
@@ -237,46 +258,73 @@ export default function HomePage() {
         <div className="mx-auto mt-[65px] grid w-[min(1086px,calc(100%-48px))] grid-cols-1 gap-[21px] md:grid-cols-3 md:grid-rows-[188px_299px]">
           <BentoTile
             href="/opportunities"
+            subtitle="Fast-Track"
             title="Selected Management Trainee"
+            photo="/images/home/upcoming-programs.jpg"
             className="h-[260px] md:col-start-1 md:row-span-2 md:h-auto"
           />
           <BentoTile
             href="/opportunities"
+            subtitle="Early Career"
             title="Graduate Program"
+            photo="/images/join/student-collaboration.png"
             className="h-[188px] md:col-span-2 md:col-start-2 md:row-start-1 md:h-auto"
           />
           <BentoTile
             href="/opportunities"
+            subtitle="Hands-On Experience"
             title="Internship Opportunities"
+            photo="/images/events/career-fair-crowd.png"
             className="h-[260px] md:col-start-2 md:row-start-2 md:h-auto"
           />
-          <div className="flex flex-col gap-[44px] md:col-start-3 md:row-start-2">
+          <div className="flex flex-col gap-[20px] md:col-start-3 md:row-start-2 justify-between">
             <BentoTile
               href="/events"
+              subtitle="Events & Workshops"
               title="Event Discovery"
-              captionAtTop
-              className="h-[188px]"
+              photo="/images/events/sala-event-interior.png"
+              className="h-[190px]"
             />
             <Link
               href="/opportunities"
-              className="flex h-[52px] items-center justify-center rounded-full bg-navy text-[16px] text-white transition-colors hover:bg-navy/90"
+              className="flex h-[52px] items-center justify-center rounded-full bg-navy text-[16px] font-semibold text-white shadow-md transition-colors hover:bg-rose"
             >
-              Explore All Opportunities
+              Explore All Opportunities →
             </Link>
           </div>
         </div>
       </section>
 
       {/* ---------------- Corporate Partners ---------------- */}
-      <section className="bg-gradient-to-b from-white via-[#BFC2CC] to-[#7B8192] pt-[80px] pb-[200px]">
-        <h2 className="text-center font-serif text-[40px] font-bold leading-none text-navy">
-          Corporate Partners
-        </h2>
+      <section className="bg-gradient-to-b from-white via-cream/80 to-[#D8DEE9] pt-[100px] pb-[160px]">
+        <div className="text-center px-6">
+          <span className="text-xs font-bold uppercase tracking-widest text-rose">
+            Collaborating Organizations
+          </span>
+          <h2 className="mt-2 font-serif text-[40px] font-bold leading-none text-navy">
+            Corporate Partners
+          </h2>
+          <p className="mt-4 text-base text-navy/70 max-w-xl mx-auto">
+            Partnering with premier industry leaders across FMCG, Banking, Consulting, and Retail to build next-generation talent pipelines.
+          </p>
+        </div>
 
-        <PhotoSlot
-          label="Logo Wall"
-          className="mx-auto mt-[87px] h-[270px] w-[min(1060px,calc(100%-48px))] shadow-[0_10px_30px_rgba(13,25,56,0.18)]"
-        />
+        {/* Dynamic Partner Cards Grid instead of plain gray Logo Wall placeholder */}
+        <div className="mx-auto mt-12 grid w-[min(1060px,calc(100%-48px))] grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {partners.map((partner) => (
+            <div
+              key={partner.name}
+              className="group flex h-28 flex-col items-center justify-center rounded-2xl border border-white/80 bg-white/90 p-4 text-center shadow-[0_4px_16px_rgba(13,25,56,0.06)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:shadow-lg"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-pink/20 to-cream text-base font-serif font-bold text-navy group-hover:scale-110 transition-transform">
+                {partner.name.charAt(0)}
+              </span>
+              <p className="mt-2 font-serif text-xs font-bold text-navy leading-tight">
+                {partner.name}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
     </>
   );

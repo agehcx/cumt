@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { partners } from "@/data/partners";
 
 /**
  * Geometry is measured from the 1440px design canvas.
@@ -271,14 +272,34 @@ export default function PartnersPage() {
       </section>
 
       {/* Current Partners */}
-      <section className="bg-white px-6 pt-[120px] pb-[120px] md:pt-[259px] md:pb-[228px]">
-        <h2 className="text-center font-serif text-[32px] font-bold leading-none text-navy md:text-[46px]">
-          Current Partners
-        </h2>
-        <div className="mx-auto mt-[56px] flex h-[200px] w-[min(1062px,100%)] items-center justify-center rounded-[2px] bg-gray md:mt-[99px] md:h-[268px]">
-          <span className="text-[18px] text-black md:text-[20px]">
-            Logo Wall
+      <section className="bg-white px-6 pt-[80px] pb-[100px] md:pt-[180px] md:pb-[160px]">
+        <div className="text-center">
+          <span className="text-xs font-bold uppercase tracking-widest text-rose">
+            Industry Collaboration
           </span>
+          <h2 className="mt-2 font-serif text-[32px] font-bold leading-none text-navy md:text-[46px]">
+            Current Partners
+          </h2>
+          <p className="mt-4 text-base text-navy/70 max-w-xl mx-auto">
+            Trusted by top global and national enterprises providing career opportunities and business case studies for CUMT members.
+          </p>
+        </div>
+
+        {/* Dynamic Partner Logo Cards */}
+        <div className="mx-auto mt-12 grid w-[min(1062px,100%)] grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {partners.map((partner) => (
+            <div
+              key={partner.name}
+              className="group flex h-32 flex-col items-center justify-center rounded-2xl border border-gray-light/80 bg-cream/50 p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:bg-white hover:shadow-lg"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-pink/25 to-cream text-lg font-serif font-bold text-navy group-hover:scale-110 transition-transform">
+                {partner.name.charAt(0)}
+              </span>
+              <p className="mt-2.5 font-serif text-xs font-bold text-navy leading-snug">
+                {partner.name}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
