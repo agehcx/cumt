@@ -160,11 +160,11 @@ function OpportunityCard({ item }: { item: OpportunityItem }) {
   return (
     <article className="group flex h-full min-h-[460px] flex-col justify-between rounded-2xl border border-[#9BA5C3]/30 bg-white p-6 shadow-[0_6px_20px_rgba(13,25,56,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-pink hover:shadow-[0_16px_36px_rgba(13,25,56,0.14)]">
       <div>
-        <div className="flex h-[110px] items-center gap-4 rounded-xl bg-gradient-to-r from-navy via-[#1e3264] to-navy px-5 text-white shadow-inner">
-          <CompanyLogo company={item.companyName} size={48} />
+        <div className="flex h-[110px] items-center gap-4 rounded-xl bg-gradient-to-r from-navy via-[#1e3264] to-navy p-4 pr-5 text-white shadow-inner">
+          <CompanyLogo company={item.companyName} size={54} className="shadow-md" />
           <div className="min-w-0 flex-1">
             <span className="text-[11px] font-bold uppercase tracking-widest text-pink">Company</span>
-            <p className="font-serif text-[20px] font-bold tracking-wide truncate">{item.companyName}</p>
+            <p className="font-serif text-[21px] font-bold tracking-wide truncate">{item.companyName}</p>
           </div>
         </div>
 
