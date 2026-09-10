@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Calendar, Clock, MapPin, ArrowRight, X } from "lucide-react";
 import type { EventItem } from "@/data/events";
 import type { PastEventItem } from "@/data/pastEvents";
 import type { OpportunityItem } from "@/data/opportunities";
@@ -84,21 +87,73 @@ export function OpportunityCard({ opportunity }: { opportunity: OpportunityItem 
 }
 
 export function TeamCard({ member }: { member: TeamMember }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="flex w-52 flex-col overflow-hidden rounded-xl border border-gray-light bg-white shadow-sm">
-      {/* eslint-disable-next-line @next/next/no-img-element -- static asset in public/, next/image adds no value here */}
-      <img
-        src={member.photo}
-        alt={member.name}
-        className="h-60 w-full object-cover object-top"
-      />
-      <div className="flex flex-col gap-1 p-4 text-center">
-        <p className="font-serif text-sm font-semibold text-navy">
-          {member.name} <span className="text-navy/60">({member.nickname})</span>
-        </p>
-        <p className="text-xs font-medium text-rose">{member.role}</p>
-        <p className="text-xs leading-snug text-navy/60">{member.highlight}</p>
+    <>
+      <div 
+        onClick={() => setIsOpen(true)}
+        className="flex w-52 cursor-pointer flex-col overflow-hidden rounded-xl border border-gray-light bg-white shadow-sm transition-transform hover:scale-105"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element -- static asset in public/, next/image adds no value here */}
+        <img
+          src={member.photo}
+          alt={member.name}
+          className="h-60 w-full object-cover object-top"
+        />
+        <div className="flex flex-col gap-1 p-4 text-center">
+          <p className="font-serif text-sm font-semibold text-navy">
+            {member.name} <br /><span className="text-navy/60">({member.nickname})</span>
+          </p>
+          <p className="text-xs font-medium text-rose">{member.role}</p>
+        </div>
       </div>
-    </div>
+
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/50 p-4 backdrop-blur-sm" onClick={() => setIsOpen(false)}>
+          <div 
+            className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 shadow-xl sm:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="absolute right-4 top-4 rounded-full p-2 text-navy/50 transition-colors hover:bg-gray-light hover:text-navy"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start sm:gap-6">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={member.photo}
+                alt={member.name}
+                className="h-32 w-32 shrink-0 rounded-full object-cover object-top border-4 border-cream"
+              />
+              <div>
+                <h3 className="font-serif text-2xl font-bold text-navy">
+                  {member.name} <span className="font-normal text-navy/60">({member.nickname})</span>
+                </h3>
+                <p className="mt-1 font-medium text-rose">{member.role}</p>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-6">
+              {member.achievements.map((achievement, idx) => (
+                <div key={idx}>
+                  <h4 className="font-serif text-lg font-semibold text-blue">{achievement.section}</h4>
+                  <ul className="mt-3 flex flex-col gap-2 pl-5 text-sm text-navy/80">
+                    {achievement.items.map((item, itemIdx) => (
+                      <li key={itemIdx} className="list-disc pl-1">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
