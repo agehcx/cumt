@@ -165,19 +165,22 @@ function Field({
 function BentoCard({ lines, area, title, chevron, photo }: CardTile) {
   return (
     <div
-      className={`group relative min-h-[180px] overflow-hidden rounded-[16px] border border-white/60 bg-navy shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:min-h-0 ${area}`}
+      className={`group relative min-h-[180px] overflow-hidden rounded-[20px] border border-white/20 bg-navy shadow-[0_8px_30px_rgba(13,25,56,0.12)] transition-all duration-300 hover:-translate-y-1.5 hover:border-pink/80 hover:shadow-[0_20px_40px_rgba(13,25,56,0.22)] md:min-h-0 ${area}`}
     >
       {photo && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={photo}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-35 transition-transform duration-500 group-hover:scale-105"
+          className="absolute inset-0 h-full w-full object-cover opacity-65 transition-transform duration-700 ease-out group-hover:scale-110"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-cream/95 via-cream/80 to-cream/70 backdrop-blur-[2px] transition-colors group-hover:from-white group-hover:via-white/90" />
+      {/* Rich overlay matching the brand aesthetic */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0D1938]/95 via-[#0D1938]/50 to-transparent" />
+      <div className="absolute inset-0 bg-navy/20 transition-opacity group-hover:opacity-0" />
+      
       <h3
-        className={`relative z-10 max-w-[calc(100%-56px)] font-serif text-[28px] font-bold leading-[34px] text-navy md:text-[42px] md:leading-[50px] ${title}`}
+        className={`absolute z-10 max-w-[calc(100%-80px)] font-serif text-[28px] font-bold leading-[34px] text-white drop-shadow-md transition-colors group-hover:text-pink md:text-[38px] md:leading-[46px] ${title}`}
       >
         {lines.map((line) => (
           <span key={line} className="block">
@@ -187,9 +190,9 @@ function BentoCard({ lines, area, title, chevron, photo }: CardTile) {
       </h3>
       <span
         aria-hidden="true"
-        className={`relative z-10 flex h-[40px] w-[40px] items-center justify-center rounded-full border-[3px] border-rose bg-white/90 shadow-sm transition-transform group-hover:scale-110 ${chevron}`}
+        className={`absolute z-10 flex h-[42px] w-[42px] items-center justify-center rounded-full border-2 border-pink bg-navy/80 text-pink shadow-lg backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:bg-rose group-hover:text-white group-hover:border-rose ${chevron}`}
       >
-        <ChevronRight className="h-[22px] w-[22px] text-rose" strokeWidth={3} />
+        <ChevronRight className="h-[22px] w-[22px]" strokeWidth={2.5} />
       </span>
     </div>
   );
