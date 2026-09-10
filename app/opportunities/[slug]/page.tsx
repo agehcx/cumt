@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { ExternalLink } from "lucide-react";
 import { Placeholder } from "@/components/ui";
 import { opportunities } from "@/data/opportunities";
+import { CompanyLogo } from "@/components/company-logo";
 
 export function generateStaticParams() {
   return opportunities.map((opportunity) => ({ slug: opportunity.slug }));
@@ -38,12 +39,15 @@ export default async function OpportunityDetailPage({ params }: Props) {
             </span>
           </div>
 
-          <div className="mt-6">
-            <span className="text-xs font-semibold uppercase tracking-widest text-pink/80">Corporate Partner</span>
-            <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl text-white">
-              {opportunity.programName}
-            </h1>
-            <p className="mt-1.5 text-lg font-medium text-pink">{opportunity.companyName}</p>
+          <div className="mt-6 flex items-center gap-5">
+            <CompanyLogo company={opportunity.companyName} size={64} />
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-pink/80">Program Provider</span>
+              <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl text-white">
+                {opportunity.programName}
+              </h1>
+              <p className="mt-1 text-lg font-medium text-pink">{opportunity.companyName}</p>
+            </div>
           </div>
 
           <div className="mt-4 border-t border-white/15 pt-3 text-xs text-white/80">

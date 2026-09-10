@@ -1,11 +1,10 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import HeroIllustration from "@/components/hero-illustration";
-import { partners } from "@/data/partners";
 
 const STATS = [
   { value: "500+", label: "Students Reached" },
-  { value: "10+", label: "Corporate Partners" },
+  { value: "20+", label: "Target Partners" },
   { value: "15+", label: "Career Events" },
   { value: "20+", label: "MT Opportunities" },
 ];
@@ -295,35 +294,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------------- Corporate Partners ---------------- */}
-      <section className="bg-gradient-to-b from-white via-cream/80 to-[#D8DEE9] pt-[100px] pb-[160px]">
-        <div className="text-center px-6">
+      {/* ---------------- Corporate Engagement ---------------- */}
+      <section className="bg-gradient-to-b from-white via-cream/60 to-[#D8DEE9]/40 pt-[90px] pb-[130px]">
+        <div className="mx-auto max-w-4xl text-center px-6">
           <span className="text-xs font-bold uppercase tracking-widest text-rose">
-            Collaborating Organizations
+            Industry Collaboration
           </span>
-          <h2 className="mt-2 font-serif text-[40px] font-bold leading-none text-navy">
-            Corporate Partners
+          <h2 className="mt-2 font-serif text-[38px] md:text-[46px] font-bold leading-tight text-navy">
+            Connecting Ambitious Students with Leading Companies
           </h2>
-          <p className="mt-4 text-base text-navy/70 max-w-xl mx-auto">
-            Partnering with premier industry leaders across FMCG, Banking, Consulting, and Retail to build next-generation talent pipelines.
+          <p className="mt-4 text-base md:text-lg text-navy/75 max-w-2xl mx-auto leading-relaxed">
+            Collaborating with premier industry leaders across FMCG, Banking, Consulting, Technology, and Retail to cultivate high-impact talent pipelines.
           </p>
-        </div>
-
-        {/* Dynamic Partner Cards Grid instead of plain gray Logo Wall placeholder */}
-        <div className="mx-auto mt-12 grid w-[min(1060px,calc(100%-48px))] grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {partners.map((partner) => (
-            <div
-              key={partner.name}
-              className="group flex h-28 flex-col items-center justify-center rounded-2xl border border-white/80 bg-white/90 p-4 text-center shadow-[0_4px_16px_rgba(13,25,56,0.06)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:shadow-lg"
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/partners"
+              className="inline-flex h-[48px] items-center justify-center rounded-full bg-navy px-8 text-[15px] font-semibold text-white shadow-md transition-all hover:bg-rose hover:shadow-lg"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-pink/20 to-cream text-base font-serif font-bold text-navy group-hover:scale-110 transition-transform">
-                {partner.name.charAt(0)}
-              </span>
-              <p className="mt-2 font-serif text-xs font-bold text-navy leading-tight">
-                {partner.name}
-              </p>
-            </div>
-          ))}
+              Partner with CUMT →
+            </Link>
+          </div>
         </div>
       </section>
     </>

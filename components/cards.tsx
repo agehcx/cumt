@@ -8,6 +8,7 @@ import type { PastEventItem } from "@/data/pastEvents";
 import type { OpportunityItem } from "@/data/opportunities";
 import type { TeamMember } from "@/data/team";
 import { StatusBadge, Tag, ButtonLink } from "@/components/ui";
+import { CompanyLogo } from "@/components/company-logo";
 
 export function EventCard({ event }: { event: EventItem }) {
   return (
@@ -70,9 +71,12 @@ export function OpportunityCard({ opportunity }: { opportunity: OpportunityItem 
   return (
     <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-gray-light/80 bg-white shadow-[0_4px_16px_rgba(13,25,56,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:shadow-[0_12px_28px_rgba(13,25,56,0.12)]">
       <div>
-        <div className="flex h-28 flex-col justify-center bg-[linear-gradient(135deg,#0D1938_0%,#324574_100%)] px-6 text-white">
-          <span className="text-xs font-semibold uppercase tracking-wider text-pink">Program Provider</span>
-          <p className="font-serif text-lg font-bold">{opportunity.companyName}</p>
+        <div className="flex h-24 items-center gap-4 bg-[linear-gradient(135deg,#0D1938_0%,#324574_100%)] px-6 text-white">
+          <CompanyLogo company={opportunity.companyName} size={44} />
+          <div className="min-w-0 flex-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-pink">Program Provider</span>
+            <p className="font-serif text-lg font-bold leading-snug truncate">{opportunity.companyName}</p>
+          </div>
         </div>
 
         <div className="flex flex-col gap-3.5 p-6">

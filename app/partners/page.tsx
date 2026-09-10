@@ -1,5 +1,4 @@
 import { ChevronRight } from "lucide-react";
-import { partners } from "@/data/partners";
 
 /**
  * Geometry is measured from the 1440px design canvas.
@@ -15,6 +14,8 @@ type CardTile = {
   readonly title: string;
   /** chevron corner */
   readonly chevron: string;
+  /** background photo */
+  readonly photo?: string;
 };
 
 const CARDS: readonly CardTile[] = [
@@ -23,42 +24,49 @@ const CARDS: readonly CardTile[] = [
     area: "md:col-start-1 md:col-span-2 md:row-start-1",
     title: "left-[32px] top-[33px]",
     chevron: "bottom-[25px] right-[25px]",
+    photo: "/images/home/upcoming-programs.jpg",
   },
   {
     lines: ["Career", "Workshops"],
     area: "md:col-start-3 md:row-start-1 md:row-span-2",
     title: "left-[28px] top-[33px]",
     chevron: "bottom-[25px] right-[25px]",
+    photo: "/images/events/career-fair-crowd.png",
   },
   {
     lines: ["Networking", "Events"],
     area: "md:col-start-1 md:row-start-2 md:row-span-2",
     title: "left-[32px] top-[29px]",
     chevron: "bottom-[25px] right-[25px]",
+    photo: "/images/home/pillar-connect.jpg",
   },
   {
     lines: ["Case", "Workshops"],
     area: "md:col-start-2 md:row-start-2",
     title: "bottom-[27px] left-[32px]",
     chevron: "bottom-[25px] right-[25px]",
+    photo: "/images/home/pillar-learn.jpg",
   },
   {
     lines: ["Management", "Trainee Talks"],
     area: "md:col-start-2 md:col-span-2 md:row-start-3",
     title: "right-[22px] top-[16px] text-right",
     chevron: "bottom-[25px] right-[25px]",
+    photo: "/images/events/sala-event-interior.png",
   },
   {
     lines: ["Recruitment Promotion"],
     area: "md:col-start-1 md:col-span-2 md:row-start-4",
     title: "bottom-[27px] left-[32px]",
     chevron: "right-[25px] top-[20px]",
+    photo: "/images/join/student-collaboration.png",
   },
   {
     lines: ["Sponsorship"],
     area: "md:col-start-3 md:row-start-4",
     title: "bottom-[27px] left-[28px]",
     chevron: "right-[25px] top-[20px]",
+    photo: "/images/home/pillar-launch.jpg",
   },
 ];
 
@@ -154,13 +162,22 @@ function Field({
   );
 }
 
-function BentoCard({ lines, area, title, chevron }: CardTile) {
+function BentoCard({ lines, area, title, chevron, photo }: CardTile) {
   return (
     <div
-      className={`relative min-h-[180px] rounded-[12px] bg-gray md:min-h-0 ${area}`}
+      className={`group relative min-h-[180px] overflow-hidden rounded-[16px] border border-white/60 bg-navy shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:min-h-0 ${area}`}
     >
+      {photo && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={photo}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-35 transition-transform duration-500 group-hover:scale-105"
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-cream/95 via-cream/80 to-cream/70 backdrop-blur-[2px] transition-colors group-hover:from-white group-hover:via-white/90" />
       <h3
-        className={`absolute max-w-[calc(100%-56px)] font-serif text-[30px] font-bold leading-[36px] text-navy md:text-[46px] md:leading-[54px] ${title}`}
+        className={`relative z-10 max-w-[calc(100%-56px)] font-serif text-[28px] font-bold leading-[34px] text-navy md:text-[42px] md:leading-[50px] ${title}`}
       >
         {lines.map((line) => (
           <span key={line} className="block">
@@ -170,7 +187,7 @@ function BentoCard({ lines, area, title, chevron }: CardTile) {
       </h3>
       <span
         aria-hidden="true"
-        className={`absolute flex h-[40px] w-[40px] items-center justify-center rounded-full border-[3px] border-rose bg-white/45 ${chevron}`}
+        className={`relative z-10 flex h-[40px] w-[40px] items-center justify-center rounded-full border-[3px] border-rose bg-white/90 shadow-sm transition-transform group-hover:scale-110 ${chevron}`}
       >
         <ChevronRight className="h-[22px] w-[22px] text-rose" strokeWidth={3} />
       </span>
@@ -271,37 +288,7 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* Current Partners */}
-      <section className="bg-white px-6 pt-[80px] pb-[100px] md:pt-[180px] md:pb-[160px]">
-        <div className="text-center">
-          <span className="text-xs font-bold uppercase tracking-widest text-rose">
-            Industry Collaboration
-          </span>
-          <h2 className="mt-2 font-serif text-[32px] font-bold leading-none text-navy md:text-[46px]">
-            Current Partners
-          </h2>
-          <p className="mt-4 text-base text-navy/70 max-w-xl mx-auto">
-            Trusted by top global and national enterprises providing career opportunities and business case studies for CUMT members.
-          </p>
-        </div>
 
-        {/* Dynamic Partner Logo Cards */}
-        <div className="mx-auto mt-12 grid w-[min(1062px,100%)] grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-          {partners.map((partner) => (
-            <div
-              key={partner.name}
-              className="group flex h-32 flex-col items-center justify-center rounded-2xl border border-gray-light/80 bg-cream/50 p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:bg-white hover:shadow-lg"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-pink/25 to-cream text-lg font-serif font-bold text-navy group-hover:scale-110 transition-transform">
-                {partner.name.charAt(0)}
-              </span>
-              <p className="mt-2.5 font-serif text-xs font-bold text-navy leading-snug">
-                {partner.name}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Contact form */}
       <section className="bg-[linear-gradient(180deg,#324574_0%,#0D1938_100%)] px-6 pt-[110px] pb-[110px] md:pt-[198px] md:pb-[203px]">
