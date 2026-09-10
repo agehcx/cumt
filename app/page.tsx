@@ -128,23 +128,16 @@ function Pillar({
     <img
       src={photo}
       alt=""
-      className="h-[226px] w-full rounded-[6px] object-cover"
+      className={`h-[226px] w-full rounded-[6px] object-cover ${isLeft ? "" : "md:order-1"}`}
     />
   );
 
   return (
     <div className="mx-auto grid w-[min(969px,calc(100%-48px))] grid-cols-1 items-start gap-[37px] md:grid-cols-2">
-      {isLeft ? (
-        <>
-          {copy}
-          {photoEl}
-        </>
-      ) : (
-        <>
-          {photoEl}
-          {copy}
-        </>
-      )}
+      {/* copy always precedes the photo in DOM order so it stacks first on mobile;
+          md:order flips the visual position back for right-aligned pillars */}
+      <div className={isLeft ? "" : "md:order-2"}>{copy}</div>
+      {photoEl}
     </div>
   );
 }

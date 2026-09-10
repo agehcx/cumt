@@ -157,34 +157,52 @@ function CardTag({ label }: { label: string }) {
 
 function OpportunityCard({ item }: { item: OpportunityItem }) {
   return (
-    <article className="flex h-full min-h-[441px] flex-col rounded-[14px] bg-cream p-[14px] shadow-[0_6px_16px_rgba(4,10,26,0.22)]">
-      <div className="flex h-[145px] shrink-0 items-center justify-center rounded-[12px] bg-[linear-gradient(90deg,#F4F2F4_0%,#F2E1E9_50%,#F4F2F4_100%)] px-[16px]">
-        <p className="text-center text-[18px] text-navy">{item.companyName}</p>
+    <article className="group flex h-full min-h-[460px] flex-col justify-between rounded-2xl border border-[#9BA5C3]/30 bg-white p-6 shadow-[0_6px_20px_rgba(13,25,56,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:border-pink hover:shadow-[0_16px_36px_rgba(13,25,56,0.14)]">
+      <div>
+        <div className="flex h-[110px] items-center justify-between rounded-xl bg-gradient-to-r from-navy via-[#1e3264] to-navy px-6 text-white shadow-inner">
+          <div>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-pink">Company</span>
+            <p className="font-serif text-[22px] font-bold tracking-wide">{item.companyName}</p>
+          </div>
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 text-pink backdrop-blur-sm font-serif font-bold text-lg">
+            {item.companyName.charAt(0)}
+          </span>
+        </div>
+
+        <h3 className="mt-6 font-serif text-[26px] font-bold leading-[1.25] text-navy group-hover:text-rose transition-colors">
+          {item.programName}
+        </h3>
+
+        <div className="mt-4 flex items-center gap-2 rounded-lg bg-cream/80 px-3.5 py-2 text-xs font-semibold text-navy/80">
+          <Clock className="h-4 w-4 shrink-0 text-rose" strokeWidth={2} aria-hidden="true" />
+          <span>
+            Application Deadline: <strong className="text-navy">{item.applicationDeadline}</strong>
+          </span>
+        </div>
+
+        <p className="mt-4 text-xs leading-relaxed text-navy/70 line-clamp-3">
+          {item.overview}
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          <CardTag label={item.programType} />
+          <span className="inline-flex h-[28px] items-center rounded-[5px] bg-cream px-[10px] text-[13px] font-medium text-navy/80">
+            {item.industry}
+          </span>
+          <span className="inline-flex h-[28px] items-center rounded-[5px] bg-rose/15 px-[10px] text-[13px] font-semibold text-rose">
+            {item.applicationStatus}
+          </span>
+        </div>
       </div>
 
-      <h3 className="mt-[26px] font-serif text-[34px] leading-[1.15] text-navy">
-        {item.programName}
-      </h3>
-
-      <p className="mt-[38px] flex items-center gap-[7px] text-[17px] text-navy">
-        <Clock className="h-[15px] w-[15px] shrink-0" strokeWidth={1.6} aria-hidden="true" />
-        <span>
-          Application Deadline: <span className="ml-[6px]">{item.applicationDeadline}</span>
-        </span>
-      </p>
-
-      <div className="mt-[35px] flex flex-wrap gap-[8px]">
-        <CardTag label={item.programType} />
-        <CardTag label={item.industry} />
-        <CardTag label={item.applicationStatus} />
+      <div className="mt-6 border-t border-gray-light/60 pt-4">
+        <Link
+          href={`/opportunities/${item.slug}`}
+          className="flex h-[44px] w-full items-center justify-center rounded-full bg-navy text-[15px] font-semibold text-white shadow-md transition-all group-hover:bg-rose group-hover:shadow-rose/30"
+        >
+          View Full Opportunity Details →
+        </Link>
       </div>
-
-      <Link
-        href={`/opportunities/${item.slug}`}
-        className="mx-auto mt-auto mb-[4px] flex h-[43px] w-[min(264px,100%)] items-center justify-center rounded-full bg-navy text-[17px] text-cream transition-opacity hover:opacity-90"
-      >
-        View Opportunity
-      </Link>
     </article>
   );
 }

@@ -13,32 +13,43 @@ export function EventCard({ event }: { event: EventItem }) {
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="flex flex-col gap-4 rounded-2xl border border-gray-light bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-gray-light/80 bg-white p-6 shadow-[0_4px_16px_rgba(13,25,56,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:shadow-[0_12px_28px_rgba(13,25,56,0.12)]"
     >
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h3 className="font-serif text-lg font-semibold text-navy">{event.title}</h3>
-          <p className="text-sm text-navy/60">{event.partnerCompany}</p>
+      <div className="flex flex-col gap-4">
+        <div className="flex items-start justify-between gap-3">
+          <span className="inline-block rounded-full bg-pink/25 px-3 py-1 font-sans text-xs font-semibold uppercase tracking-wider text-rose">
+            {event.category}
+          </span>
+          <StatusBadge status={event.status} />
         </div>
-        <Tag>{event.category}</Tag>
+
+        <div>
+          <h3 className="font-serif text-xl font-bold leading-snug text-navy group-hover:text-rose transition-colors">
+            {event.title}
+          </h3>
+          <p className="mt-1 font-sans text-sm font-medium text-blue">{event.partnerCompany}</p>
+        </div>
+
+        <div className="flex flex-col gap-2 rounded-xl bg-cream/70 p-3.5 text-xs text-navy/80">
+          <span className="flex items-center gap-2 font-medium">
+            <Calendar size={14} className="text-rose shrink-0" /> {event.date}
+          </span>
+          <span className="flex items-center gap-2 font-medium">
+            <Clock size={14} className="text-rose shrink-0" /> {event.time}
+          </span>
+          <span className="flex items-center gap-2 font-medium">
+            <MapPin size={14} className="text-rose shrink-0" /> {event.location}
+          </span>
+        </div>
+
+        <p className="text-sm leading-relaxed text-navy/70 line-clamp-2">{event.shortDescription}</p>
       </div>
 
-      <div className="flex flex-col gap-1.5 text-sm text-navy/70">
-        <span className="flex items-center gap-2">
-          <Calendar size={14} /> {event.date}
+      <div className="mt-5 flex items-center justify-between border-t border-gray-light/60 pt-4 text-xs font-semibold text-navy">
+        <span className="text-navy/60">View Details</span>
+        <span className="flex items-center gap-1 text-rose group-hover:translate-x-1 transition-transform">
+          Register <ArrowRight size={14} />
         </span>
-        <span className="flex items-center gap-2">
-          <Clock size={14} /> {event.time}
-        </span>
-        <span className="flex items-center gap-2">
-          <MapPin size={14} /> {event.location}
-        </span>
-      </div>
-
-      <p className="text-sm text-navy/70">{event.shortDescription}</p>
-
-      <div className="mt-auto flex justify-end">
-        <StatusBadge status={event.status} />
       </div>
     </Link>
   );
@@ -46,9 +57,9 @@ export function EventCard({ event }: { event: EventItem }) {
 
 export function PastEventCard({ event }: { event: PastEventItem }) {
   return (
-    <div className="flex flex-col gap-2">
-      <div className="relative flex h-40 items-end rounded-xl bg-gray-light p-4">
-        <span className="font-serif text-base font-semibold text-navy/70">{event.title}</span>
+    <div className="group flex flex-col gap-2 rounded-xl border border-gray-light bg-white p-3 shadow-sm transition-all hover:shadow-md">
+      <div className="relative flex h-40 items-end overflow-hidden rounded-lg bg-gradient-to-t from-navy/80 to-navy/30 p-4">
+        <span className="font-serif text-base font-semibold text-white">{event.title}</span>
       </div>
       <Tag className="w-fit">{event.category}</Tag>
     </div>
@@ -57,27 +68,39 @@ export function PastEventCard({ event }: { event: PastEventItem }) {
 
 export function OpportunityCard({ opportunity }: { opportunity: OpportunityItem }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-gray-light bg-white shadow-sm">
-      <div className="flex h-24 items-center justify-center bg-gradient-to-br from-pink/50 to-cream px-4 text-center text-sm font-medium text-navy/60">
-        Company Name & Logo
+    <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-gray-light/80 bg-white shadow-[0_4px_16px_rgba(13,25,56,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-pink hover:shadow-[0_12px_28px_rgba(13,25,56,0.12)]">
+      <div>
+        <div className="flex h-28 flex-col justify-center bg-[linear-gradient(135deg,#0D1938_0%,#324574_100%)] px-6 text-white">
+          <span className="text-xs font-semibold uppercase tracking-wider text-pink">Program Provider</span>
+          <p className="font-serif text-lg font-bold">{opportunity.companyName}</p>
+        </div>
+
+        <div className="flex flex-col gap-3.5 p-6">
+          <h3 className="font-serif text-xl font-bold leading-snug text-navy group-hover:text-rose transition-colors">
+            {opportunity.programName}
+          </h3>
+
+          <p className="flex items-center gap-2 text-xs font-semibold text-navy/70">
+            <span className="h-2 w-2 rounded-full bg-rose animate-pulse" />
+            Deadline: <span className="text-navy font-bold">{opportunity.applicationDeadline}</span>
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            <span className="rounded-md bg-pink/20 px-2.5 py-1 text-xs font-medium text-navy">{opportunity.programType}</span>
+            <span className="rounded-md bg-cream px-2.5 py-1 text-xs font-medium text-navy/80">{opportunity.industry}</span>
+            <span className="rounded-md bg-rose/15 px-2.5 py-1 text-xs font-semibold text-rose">{opportunity.applicationStatus}</span>
+          </div>
+
+          <p className="text-xs leading-relaxed text-navy/70 line-clamp-3 pt-1">
+            {opportunity.overview}
+          </p>
+        </div>
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <div>
-          <h3 className="font-serif text-lg font-semibold text-navy">{opportunity.programName}</h3>
-          <p className="text-sm text-navy/60">{opportunity.companyName}</p>
-        </div>
 
-        <p className="text-sm text-navy/70">Deadline: {opportunity.applicationDeadline}</p>
-
-        <div className="flex flex-wrap gap-2">
-          <Tag>{opportunity.programType}</Tag>
-          <Tag>{opportunity.industry}</Tag>
-          <Tag>{opportunity.applicationStatus}</Tag>
-        </div>
-
+      <div className="p-6 pt-0">
         <ButtonLink
           href={`/opportunities/${opportunity.slug}`}
-          className="mt-auto w-full gap-2 bg-navy text-white hover:bg-navy/90"
+          className="w-full justify-center gap-2 rounded-full bg-navy py-2.5 text-sm font-semibold text-white transition-colors group-hover:bg-rose"
         >
           View Opportunity <ArrowRight size={14} />
         </ButtonLink>
